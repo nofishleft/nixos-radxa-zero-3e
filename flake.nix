@@ -8,14 +8,15 @@
   outputs = { self, nixpkgs, ... }: let
     configuration = nixpkgs.lib.nixosSystem {
       modules = [
-        "${nixpkgs}/nixos/modules/profiles/base.nix"
-        "${nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
-        ./sd-image.nix
         {
           nixpkgs.config.allowUnsupportedSystem = true;
           nixpkgs.hostPlatform.system = "aarch64-linux";
-          nixpkgs.buildPlatform.system = "x86_64-linux";
+          nixpkgs.buildPlatform.system = "aarch64-linux";
+#          nixpkgs.buildPlatform.system = "x86_64-linux";
         }
+        "${nixpkgs}/nixos/modules/profiles/base.nix"
+        "${nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
+        ./sd-image.nix
       ];
     };
 
